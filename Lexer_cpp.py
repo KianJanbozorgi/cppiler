@@ -100,3 +100,4 @@ return 0;
 
 l = Lexer(cpp_code)
 print(l.move_forw())
+tokens_list = l.move_forw()
