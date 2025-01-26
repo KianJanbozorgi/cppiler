@@ -1,14 +1,14 @@
 import Lexer_cpp
 
 t = Lexer_cpp.tokens_list
-token_table = {
+token_table = { # modifiying the hashes 
     "string":[],
     "number":[],
     "symbol":[],
     "identifier":[],
     "reserved_word":[]
 }
-for token in t:
+for token in t: # modifying the values and putting them in a sorted array(chaining)
     if token[0] == Lexer_cpp.St:
         token_table["string"].append(token[1])
     elif token[0] == Lexer_cpp.Nu:
