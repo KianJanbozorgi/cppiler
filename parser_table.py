@@ -1,6 +1,6 @@
 parse_table = {
-    "Start": {"using": "S N M", "int": "S N M"},
-    "S": { "using": "ε", "int": "ε"},
+    "Start": {"#include": "S N M", "int": "S N M"},
+    "S": { "using": "ε", "int": "ε" ,"#include": "#include S"},
     "N": {"using": "using namespace std ;", "int": "ε"},
     "M": {"int": "int main ( ) { T V }"},
     "T": {

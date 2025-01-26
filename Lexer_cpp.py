@@ -1,6 +1,6 @@
 import re
 Let = 'letter' # modifying all the token types
-Ide = 'Identifier'
+Ide = 'identifier'
 Dig = 'digit'
 Nu = 'number'
 Res = 'reservedword'
@@ -82,7 +82,7 @@ class Lexer:
         return tokens
 
 
-cpp_code = """#include <iostream>
+cpp_code = """#include 
 using namespace std;
 int main(){
 int x;

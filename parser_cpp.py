@@ -22,7 +22,6 @@ class Parser:
                         rule = self.parse_table[top_stack].get(token)
                         if not rule:
                             print(tokens[current_token])
-
                             
                 parse_tree.append([top_stack , []])
                 children = rule.split()
