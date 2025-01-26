@@ -1,5 +1,5 @@
 import re
-Let = 'letter'
+Let = 'letter' # modifying all the token types
 Ide = 'Identifier'
 Dig = 'digit'
 Nu = 'number'
@@ -7,7 +7,7 @@ Res = 'reservedword'
 Sym = 'symbol'
 St = 'string'
 
-whitespace = re.compile(r'\s')
+whitespace = re.compile(r'\s') # modifying all the possible token values 
 reserved_words = [
     'int', 'float', 'void', 'return', 'if', 'while', 'cin', 'cout', 'continue', 'break',
     '#include', 'using', 'iostream', 'namespace', 'std', 'main'
@@ -26,16 +26,16 @@ class Lexer:
 
     def move_forw(self):
         tokens = []
-        current = 0
+        current = 0 # iterating over characters
         while current < len(self.text):
             char = self.text[current]
 
-            # Skip whitespace
+            # whitespace
             if re.match(whitespace, char):
                 current += 1
                 continue
 
-            # Handle symbols
+            # symbols
             if char in symbols:
                 if current + 1 < len(self.text) and self.text[current:current + 2] in symbols:
                     tokens.append([Sym, self.text[current:current + 2]])
@@ -45,7 +45,7 @@ class Lexer:
                 current += 1
                 continue
 
-            # Handle numbers
+            # numbers
             if re.match(digits, char):
                 s = ''
                 while current < len(self.text) and re.match(digits, self.text[current]):
@@ -55,7 +55,7 @@ class Lexer:
                 tokens.append([Nu, s])
                 continue
 
-            # Handle identifiers and reserved words
+            # identifiers and reserved words
             if re.match(letters, char):
                 s = ''
                 while current < len(self.text) and (re.match(letters, self.text[current]) or re.match(digits, self.text[current])):
@@ -77,8 +77,6 @@ class Lexer:
                 tokens.append([St, s])
                 current += 1  # Move past the closing quote
                 continue
-
-            # Increment for unrecognized characters
             current += 1
 
         return tokens
