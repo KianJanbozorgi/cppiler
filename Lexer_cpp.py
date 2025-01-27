@@ -1,5 +1,5 @@
 import re
-Let = 'letter' # modifying all the token types
+Let = 'letter'
 Ide = 'identifier'
 Dig = 'digit'
 Nu = 'number'
@@ -7,7 +7,7 @@ Res = 'reservedword'
 Sym = 'symbol'
 St = 'string'
 
-whitespace = re.compile(r'\s') # modifying all the possible token values 
+whitespace = re.compile(r'\s')
 reserved_words = [
     'int', 'float', 'void', 'return', 'if', 'while', 'cin', 'cout', 'continue', 'break',
     '#include', 'using', 'iostream', 'namespace', 'std', 'main'
@@ -24,47 +24,49 @@ class Lexer:
     def __init__(self, text):
         self.text = text
 
-    def move_forw(self):
+    def move_forw(self): #O(n) where n is the number of characters
         tokens = []
-        current = 0 # iterating over characters
+        current = 0
+        l_number = 0
         while current < len(self.text):
             char = self.text[current]
-
-            # whitespace
+            if char == '\n':
+                l_number += 1
+            # Skip whitespace
             if re.match(whitespace, char):
                 current += 1
                 continue
 
-            # symbols
+            # Handle symbols
             if char in symbols:
                 if current + 1 < len(self.text) and self.text[current:current + 2] in symbols:
-                    tokens.append([Sym, self.text[current:current + 2]])
+                    tokens.append([Sym, self.text[current:current + 2] , l_number])
                     current += 2
                     continue
-                tokens.append([Sym, char])
+                tokens.append([Sym, char , l_number])
                 current += 1
                 continue
 
-            # numbers
+            # Handle numbers
             if re.match(digits, char):
                 s = ''
                 while current < len(self.text) and re.match(digits, self.text[current]):
                     s += self.text[current]
                     current += 1
                 
-                tokens.append([Nu, s])
+                tokens.append([Nu, s , l_number])
                 continue
 
-            # identifiers and reserved words
+            # Handle identifiers and reserved words
             if re.match(letters, char):
                 s = ''
                 while current < len(self.text) and (re.match(letters, self.text[current]) or re.match(digits, self.text[current])):
                     s += self.text[current]
                     current += 1
                 if s in reserved_words:
-                    tokens.append([Res, s])
+                    tokens.append([Res, s , l_number])
                 else:
-                    tokens.append([Ide,s])
+                    tokens.append([Ide,s , l_number ])
                 continue
 
             # Handle strings
@@ -74,28 +76,15 @@ class Lexer:
                 while current < len(self.text) and self.text[current] != '"':
                     s += self.text[current]
                     current += 1
-                tokens.append([St, s])
+                tokens.append([St, s , l_number])
                 current += 1  # Move past the closing quote
                 continue
+
+            # Increment for unrecognized characters
             current += 1
 
         return tokens
 
 
-cpp_code = """#include 
-using namespace std;
-int main(){
-int x;
-int s=0, t=10;
-while (t >= 0){
-cin>>x;
-t = t - 1;
-s = s + x;
-}
-cout<<"sum="<<s;
-return 0;
-}"""
 
-l = Lexer(cpp_code)
-print(l.move_forw())
-tokens_list = l.move_forw()
+

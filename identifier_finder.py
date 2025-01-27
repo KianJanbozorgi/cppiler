@@ -1,10 +1,11 @@
 import parser_cpp
 
-parse_tree = parser_cpp.parse_tree
 
-parse_tree_dict = {}
-for i in parse_tree: # O(n) which n is number of nodes because the dictionary insertion like hash table is O(1)
-    parse_tree_dict[i[0]] = i[1]
+def parse_tree_dict_maker(parse_tree):
+    parse_tree_dict = {}
+    for i in parse_tree: # O(n) which n is number of nodes because the dictionary insertion like hash table is O(1)
+        parse_tree_dict[i[0]] = i[1]
+    return parse_tree_dict
     
 def find_first_assignment(parse_tree_dict, identifier):
     stack = [("Start" , 0)]  # Start DFS with the root node
@@ -43,4 +44,3 @@ def find_first_assignment(parse_tree_dict, identifier):
         num_ide = ""
     value = id_ide + " " + identifier + " " + as_ide + " " + num_ide          
     return value
-print(find_first_assignment(parse_tree_dict , "s"))
