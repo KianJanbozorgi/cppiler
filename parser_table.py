@@ -16,7 +16,7 @@ parse_table = {
     "V": {"return": "return 0 ;"},
     "Id": {"int": "int L", "float": "float L"},
     "L": {"identifier": "identifier Assign Z"},
-    "Z": {",": ", identifier Assign Z ;" , ';':";"},
+    "Z": {",": ", identifier Assign Z" , ';':";"},
     "Operation": {"number": "number P", "identifier": "identifier P"},
     "P": {
         "+": "O W P",
@@ -36,7 +36,7 @@ parse_table = {
     "Expression": {"identifier": "Operation K Operation", "number": "Operation K Operation"},
     "K": {"==": "==", ">=": ">=", "<=": "<=", "!=": "!="},
     "Loop": {"while": "while ( Expression ) { T }"},
-    "Input": {"cin": "cin >> identifier F"},
+    "Input": {"cin": "cin >> identifier F ;"},
     "F": {
         ">>": ">> identifier F",
         "float": "ε",
@@ -45,9 +45,9 @@ parse_table = {
         "identifier": "ε",
         "while ( Expression ) { T }": "ε",
         "int": "ε",
-        ";": ";",
+        ";": "ε",
     },
     "Output": {"cout": "cout << C H ;"},
-    "H": {"<<": "<< C H" , ";": ";"},
+    "H": {"<<": "<< C H" , ";": "ε"},
     "C": {"number": "number", "string": "string", "identifier": "identifier"},
 }
