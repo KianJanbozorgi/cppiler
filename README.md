@@ -1,4 +1,4 @@
-# Cppiler - A C++ Compiler Front-End
+# Cppiler - A C++ Compiler
 
 **Cppiler** is a compiler front-end for a subset of C++ syntax, demonstrating lexical analysis, syntax parsing, and semantic error checking. It includes components for tokenization, parse tree generation, and validation of assignments and syntax rules.
 
